@@ -1,0 +1,69 @@
+<div class="container">
+
+  <div class="text-center">
+    <button type="button" class="btn btn-lg" ng-click="main.getHotels()">Load Hotels</button>
+  </div>
+  <div class="row" ng-if="main.error.value">
+    <p>{{::main.error.message}}</p>
+  </div>
+  <div ng-if="!main.error.value">
+    <div ng-repeat="hotel in main.hotels" class="hotel">
+      <div class="row">
+        <div class="col-md">
+          <div class="image-left" ng-style="{'background-image': 'url('+hotel.images[0]+')'}">
+            <!-- <img ng-src="{{hotel.images[0]}}"> -->
+          </div>
+
+        </div>
+        <div class="col-md">
+          <div class="info">
+            <div class="info-top">
+              <div class="title">
+                <h3>{{ ::hotel.name }}</h3>
+                <span class="glyphicon" ng-class="hotel.stars >= 5 ? 'glyphicon-star' : 'glyphicon-star-empty'" aria-hidden="true"></span>
+                <span class="glyphicon" ng-class="hotel.stars >= 4 ? 'glyphicon-star' : 'glyphicon-star-empty'" aria-hidden="true"></span>
+                <span class="glyphicon" ng-class="hotel.stars >= 3 ? 'glyphicon-star' : 'glyphicon-star-empty'" aria-hidden="true"></span>
+                <span class="glyphicon" ng-class="hotel.stars >= 2 ? 'glyphicon-star' : 'glyphicon-star-empty'" aria-hidden="true"></span>
+                <span class="glyphicon" ng-class="hotel.stars >= 1 ? 'glyphicon-star' : 'glyphicon-star-empty'" aria-hidden="true"></span>
+                <!-- <span>stars</span> -->
+              </div>
+              <span>{{ ::hotel.city }}</span> - <span>{{::hotel.country}}</span>
+            </div>
+            <div class="info-description">
+              <p>{{ ::hotel.description }}</p>
+            </div>
+            <div class="info-bottom">
+              <button class="btn review-btn" ng-click="main.showReviews(hotel)">
+                <span ng-if="!hotel.showReviews">Show</span>
+                <span ng-if="hotel.showReviews">Hide</span>
+                reviews
+              </button>
+              <div class="price">
+                <span>{{::hotel.price}} &euro;</span>
+                <p>{{hotel.date_start | amDateFormat:'MM.DD.YYYY'}} - {{hotel.date_end | amDateFormat:'MM.DD.YYYY'}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="reviews" ng-if="hotel.showReviews">
+        <div ng-repeat="review in hotel.reviews">
+          <div class="row review-row">
+            <div class="col-md-1 review-row-status">
+              <p class="minus-plus">
+                <span class="glyphicon" ng-class="review.positive == true ? 'glyphicon-plus' : 'glyphicon-minus'" aria-hidden="true"></span>
+              </p>
+            </div>
+            <div class="col-md-11">
+              <h4>{{review.name}}</h4>
+              <p>{{review.comment}}</p>
+            </div>
+          </div>
+          <hr ng-if="!$last">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
