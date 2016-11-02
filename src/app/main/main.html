@@ -8,14 +8,14 @@
   </div>
   <div ng-if="!main.error.value">
     <div ng-repeat="hotel in main.hotels" class="hotel">
-      <div class="row">
+      <div class="row moz-fix">
         <div class="col-md">
           <div class="image-left" ng-style="{'background-image': 'url('+hotel.images[0]+')'}">
             <!-- <img ng-src="{{hotel.images[0]}}"> -->
           </div>
 
         </div>
-        <div class="col-md">
+        <div class="col-md moz-fix">
           <div class="info">
             <div class="info-top">
               <div class="title">
